@@ -16,12 +16,11 @@
 
 <body>
     <div id="game">
-        <div class="container">
-            <div class="row">
+        <div class="container mt-5">
+            <div>
                 <div class="jumbotron">
                     <h1 class="display-3">{{ message }}</h1>
-                    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra
-                        attention to featured content or information.</p>
+                    <p class="lead">This is a simple hero game between humans and beautiful monsters.</p>
                     <hr class="my-4">
                     <div class="row text-center">
                         <div class="col">
@@ -33,100 +32,47 @@
                     </div>
                     <hr>
                     <div class="row text-center">
-                        <div class="col m-2" style="width: 100px; height: 50px; border: 1px solid black;">
-                            <div :style="myClass()">lea</div>
+                        <div class="col m-2 leaBox">
+                            <div :style="myAttackStyle()"></div>
                         </div>
-                        <div class="col m-2" style="width: 100px; border: 1px solid black;"></div>
+                        <div class="col m-2 leaBox">
+                            <div :style="monsterAttackStyle()"></div>
+                        </div>
                     </div>
                     <hr class="my-4">
-                    <p class="lead">
-                        <a class="btn btn-danger btn-xs" href="#" role="button" @click="progressBar">Start</a>
-                        <a class="btn btn-warning btn-xs" href="#" role="button" @click="attack">Attack</a>
-                        <a class="btn btn-success btn-xs" href="#" role="button" @clik="reset">Reset</a>
-                        <a class="btn btn-info btn-xs" href="#" role="button">Learn more</a>
-                    </p>
+                    <div class="text-center">
+                        <!-- Visible button before game starts -->
+                        <a class="btn btn-success btn-xs" href="#" role="button" @click="startGame" v-if='showButton'>START
+                            NEW GAME</a>
+                    </div>
+                    <div class="text-center" v-if="!showButton">
+                        <!-- Visible buttons when game starts -->
+                        <a class="btn btn-danger btn-xs" href="#" role="button" @click="attack">ATTACK</a>
+                        <a class="btn btn-warning btn-xs" href="#" role="button" @click="specialAttack">SPECIAL ATTACK</a>
+                        <a class="btn btn-success btn-xs" href="#" role="button" @click="heal">HEAL</a>
+                        <a class="btn btn-secondary btn-xs" href="#" role="button" @click="giveUp">GIVE UP</a>
+                    </div>
                 </div>
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col">Type</th>
-                            <th scope="col">Column heading</th>
-                            <th scope="col">Column heading</th>
-                            <th scope="col">Column heading</th>
-                        </tr>
-                    </thead>
+                <table class="table table-hover text-center">
                     <tbody>
-                        <tr class="table-active">
-                            <th scope="row">Active</th>
-                            <td>Column content</td>
-                            <td>Column content</td>
-                            <td>Column content</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Default</th>
-                            <td>Column content</td>
-                            <td>Column content</td>
-                            <td>Column content</td>
-                        </tr>
-                        <tr class="table-primary">
-                            <th scope="row">Primary</th>
-                            <td>Column content</td>
-                            <td>Column content</td>
-                            <td>Column content</td>
-                        </tr>
-                        <tr class="table-secondary">
-                            <th scope="row">Secondary</th>
-                            <td>Column content</td>
-                            <td>Column content</td>
-                            <td>Column content</td>
-                        </tr>
-                        <tr class="table-success">
-                            <th scope="row">Success</th>
-                            <td>Column content</td>
-                            <td>Column content</td>
-                            <td>Column content</td>
-                        </tr>
-                        <tr class="table-danger">
-                            <th scope="row">Danger</th>
-                            <td>Column content</td>
-                            <td>Column content</td>
-                            <td>Column content</td>
-                        </tr>
-                        <tr class="table-warning">
-                            <th scope="row">Warning</th>
-                            <td>Column content</td>
-                            <td>Column content</td>
-                            <td>Column content</td>
-                        </tr>
-                        <tr class="table-info">
-                            <th scope="row">Info</th>
-                            <td>Column content</td>
-                            <td>Column content</td>
-                            <td>Column content</td>
-                        </tr>
-                        <tr class="table-light">
-                            <th scope="row">Light</th>
-                            <td>Column content</td>
-                            <td>Column content</td>
-                            <td>Column content</td>
-                        </tr>
-                        <tr class="table-dark">
-                            <th scope="row">Dark</th>
-                            <td>Column content</td>
-                            <td>Column content</td>
-                            <td>Column content</td>
+                        <tr v-for="(damage, index) in damageDone">
+                            <td scope="row" class="table-success" v-if="index % 2 == 0">PLAYER HITS MONSTER FOR {{
+                                damage }}</td>
+                            <td scope="row" class="table-danger" v-else>MONSTER HITS PLAYER FOR {{ damage }}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-        <button type="button" class="btn btn-primary">Primary</button>
+
+        <!-- Components -->
+        <!-- <button type="button" class="btn btn-primary">Primary</button>
         <button type="button" class="btn btn-secondary">Secondary</button>
         <button type="button" class="btn btn-success">Success</button>
         <button type="button" class="btn btn-info">Info</button>
         <button type="button" class="btn btn-warning">Warning</button>
         <button type="button" class="btn btn-danger">Danger</button>
-        <button type="button" class="btn btn-link">Link</button>
+        <button type="button" class="btn btn-link">Link</button> -->
     </div>
     <script src="app.js"></script>
 </body>
