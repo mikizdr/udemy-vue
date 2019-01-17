@@ -7,26 +7,27 @@ new Vue({
             myHealth: 0,
             monsterHealth: 0,
             damageDone: [],
-            visible: true
+            visible: true,
+            hundred: 100
         }
     },
     methods: {
         startGame() {
-            this.myHealth = 100
-            this.monsterHealth = 100
+            this.myHealth = this.hundred
+            this.monsterHealth = this.hundred
             this.showButton = false
         },
         myAttackStyle() {
             return {
                 width: this.myHealth + '%',
-                height: '100%',
+                height: this.hundred + '%',
                 backgroundColor: 'olive'
             }
         },
         monsterAttackStyle() {
             return {
                 width: this.monsterHealth + '%',
-                height: '100%',
+                height: this.hundred + '%',
                 backgroundColor: 'olive'
             }
         },
@@ -39,8 +40,8 @@ new Vue({
         damage(val1, val2) {
             this.myHealth -= Math.floor(Math.random() * val1);
             this.monsterHealth -= Math.floor(Math.random() * val2);
-            this.damageDone.push(100 - this.myHealth)
-            this.damageDone.push(100 - this.monsterHealth)
+            this.damageDone.push(this.hundred - this.myHealth)
+            this.damageDone.push(this.hundred - this.monsterHealth)
             console.log(JSON.stringify(this.damageDone))
             console.log(JSON.stringify(this.damageDone))
         },
@@ -53,7 +54,7 @@ new Vue({
                 this.myHealth += 5;
                 setTimeout(() => {
                     this.myHealth -= 4;
-                }, 1000);
+                }, 500);
                 console.log(this.myHealth)
             }
         },
