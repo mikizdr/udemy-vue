@@ -69,10 +69,10 @@
                 </div>
                 <table class="table table-hover text-center">
                     <tbody>
-                        <tr v-for="(damage, index) in damageDone">
+                        <tr v-for="(damage, index) in totalDamage">
                             <td scope="row" class="table-success" v-if="index % 2 == 0">PLAYER HITS MONSTER FOR {{
-                                damage }}</td>
-                            <td scope="row" class="table-danger" v-else>MONSTER HITS PLAYER FOR {{ damage }}</td>
+                                monsterDamage }}</td>
+                            <td scope="row" class="table-danger" v-else>MONSTER HITS PLAYER FOR {{ myDamage }}</td>
                         </tr>
                     </tbody>
                 </table>

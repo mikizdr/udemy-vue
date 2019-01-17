@@ -6,8 +6,9 @@ new Vue({
             showButton: true,
             myHealth: 0,
             monsterHealth: 0,
-            damageDone: [],
-            visible: true,
+            myDamage: 0,
+            monsterDamage: 0,
+            totalDamage: [],
             hundred: 100
         }
     },
@@ -32,22 +33,29 @@ new Vue({
             }
         },
         attack() {
-            this.damage(10, 15)
+            this.damage(10)
         },
         specialAttack() {
-            this.damage(10, 40)
+            this.damage(10, true)
         },
-        damage(val1, val2) {
-            this.myHealth -= Math.floor(Math.random() * val1);
-            this.monsterHealth -= Math.floor(Math.random() * val2);
-            this.damageDone.push(this.hundred - this.myHealth)
-            this.damageDone.push(this.hundred - this.monsterHealth)
-            console.log(JSON.stringify(this.damageDone))
-            console.log(JSON.stringify(this.damageDone))
+        damage(val1, spec = null) {
+            let damage = val1;
+            if (spec) {
+                damage = val1 * 4
+            } else {
+                damage = val1 * 2
+            }
+            this.myDamage = Math.floor(Math.random() * val1);
+            this.myHealth -= this.myDamage;
+            this.monsterDamage = Math.floor(Math.random() * damage);
+            this.monsterHealth -= this.monsterDamage;
+            this.totalDamage.unshift(this.hundred - this.monsterHealth)
+            this.totalDamage.unshift(this.hundred - this.myHealth)
+            console.log(JSON.stringify(this.totalDamage))
         },
         giveUp() {
             this.showButton = true
-            this.damageDone = []
+            this.totalDamage = []
         },
         heal() {
             if (this.myHealth < 95) {
